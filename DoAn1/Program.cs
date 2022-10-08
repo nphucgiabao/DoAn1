@@ -1,12 +1,26 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace DoAn1
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var doThi = new DoThi();
+            await doThi.DocFileAsync("../../../input.txt");
+            Console.WriteLine(doThi.soDinh);
+            foreach(var item in doThi.data)
+            {
+                var node = item.First;
+                while(node != null)
+                {
+                    Console.Write("{0} ", node.Value);
+                    node = node.Next;
+                }
+                Console.Write("\n");
+            }
+            Console.ReadKey();
         }
     }
 }
