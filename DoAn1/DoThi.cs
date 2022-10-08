@@ -9,7 +9,7 @@ namespace DoAn1
     public class DoThi
     {
         public int soDinh { get; set; }
-        public List<LinkedList<int>> data { get; set; }
+        public List<List<int>> data { get; set; }
         public async Task DocFileAsync(string duongDan)
         {
             if (File.Exists(duongDan))
@@ -20,16 +20,16 @@ namespace DoAn1
                     var lines = content.Split("\n");
                     soDinh = int.Parse(lines[0]);
                   
-                    data = new List<LinkedList<int>>();
+                    data = new List<List<int>>();
                     for (var i = 0; i < soDinh; ++i)
                     {
                         var values = lines[i + 1].Split(" ");
                         if (values != null)
                         {
-                            var list = new LinkedList<int>();
+                            var list = new List<int>();
                             for (var j = 0; j < values.Length; ++j)
                             {
-                                list.AddLast(int.Parse(values[j]));
+                                list.Add(int.Parse(values[j]));
                             }
                             data.Add(list);
                         }

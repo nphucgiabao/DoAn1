@@ -12,11 +12,9 @@ namespace DoAn1
             Console.WriteLine(doThi.soDinh);
             foreach(var item in doThi.data)
             {
-                var node = item.First;
-                while(node != null)
+                foreach(var value in item)
                 {
-                    Console.Write("{0} ", node.Value);
-                    node = node.Next;
+                    Console.Write("{0} ", value);
                 }
                 Console.Write("\n");
             }
