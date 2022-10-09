@@ -41,5 +41,37 @@ namespace DoAn1
                 Console.WriteLine("File not found!!!");
             }
         }
+
+        public List<int> TimDinhKe(int dinh)
+        {
+            var result = new List<int>();
+            var listDinhKe = this.data[dinh];
+            for (var i = 1; i < this.data[dinh].Count; i++)
+                result.Add(listDinhKe[i]);
+            return result;
+        }
+
+        public void BFS(int dinh, out bool[] visited)
+        {
+            visited = new bool[this.soDinh];
+            var queue = new Queue<int>();
+            queue.Enqueue(dinh);
+            while (queue.Count > 0)
+            {
+                var vertex = queue.Dequeue();
+                var listDinhKe = this.TimDinhKe(vertex);
+                if (listDinhKe.Count > 0)
+                {
+                    foreach(var item in listDinhKe)
+                    {
+                        if (!visited[item])
+                        {
+                            visited[item] = true;
+                            queue.Enqueue(item);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

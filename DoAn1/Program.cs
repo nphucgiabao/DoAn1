@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DoAn1
@@ -9,16 +11,26 @@ namespace DoAn1
         {
             var doThi = new DoThi();
             await doThi.DocFileAsync("../../../input.txt");
-            Console.WriteLine(doThi.soDinh);
-            foreach(var item in doThi.data)
+            
+            for (var i = 0; i < doThi.soDinh; i++)
             {
-                foreach(var value in item)
+                bool[] visited;
+                doThi.BFS(i, out visited);
+                foreach(var item in visited)
                 {
-                    Console.Write("{0} ", value);
+                    if (!item)
+                    {
+                        Console.WriteLine("false");
+                        return;
+                    }
                 }
-                Console.Write("\n");
+
             }
+            Console.WriteLine("true");
+
             Console.ReadKey();
         }
+
+        
     }
 }
