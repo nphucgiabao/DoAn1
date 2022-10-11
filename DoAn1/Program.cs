@@ -11,26 +11,32 @@ namespace DoAn1
         {
             var doThi = new DoThi();
             await doThi.DocFileAsync("../../../input.txt");
-            
-            for (var i = 0; i < doThi.soDinh; i++)
-            {
-                bool[] visited;
-                doThi.BFS(i, out visited);
-                foreach(var item in visited)
-                {
-                    if (!item)
-                    {
-                        Console.WriteLine("false");
-                        return;
-                    }
-                }
 
-            }
-            Console.WriteLine("true");
+            Cau2(doThi);
 
             Console.ReadKey();
         }
 
-        
+        static void Cau2(DoThi doThi)
+        {
+            for (var i = 0; i < doThi.soDinh; i++)
+            {
+                if (!doThi.visited[i])
+                    doThi.DFS(i);
+            }
+            var revert = doThi.RevertGraph();
+            var step = 1;
+            while (doThi.stack.Count > 0)
+            {
+                var v = doThi.stack.Pop();
+
+                if (!revert.visited[v])
+                {
+                    Console.Write("Thanh phan lien thong manh {0}: ", step++);
+                    revert.DFS2(v);
+                    Console.WriteLine("");
+                }
+            }
+        }
     }
 }
